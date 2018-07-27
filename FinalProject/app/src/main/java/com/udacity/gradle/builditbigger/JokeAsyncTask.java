@@ -1,6 +1,7 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Pair;
@@ -17,6 +18,12 @@ import java.io.IOException;
 public class JokeAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+    String name = null;
+    private final OnTaskCompleted listener;
+
+    public JokeAsyncTask(OnTaskCompleted listener) {
+        this.listener = listener;
+    }
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
@@ -36,11 +43,10 @@ public class JokeAsyncTask extends AsyncTask<Pair<Context, String>, Void, String
                         }
                     });
             // end options for devappserver
-
             myApiService = builder.build();
         }
 
-        String name = params[0].second;
+        name = params[0].second;
 
         try {
             return myApiService.sayHi(name).execute().getData();
@@ -51,6 +57,8 @@ public class JokeAsyncTask extends AsyncTask<Pair<Context, String>, Void, String
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        Log.i("API", name);
+//        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        this.listener.onTaskCompleted(result);
     }
 }
