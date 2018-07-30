@@ -48,9 +48,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:support-v4:27.1.1'
     endpointsServer project(path: ':backend', configuration: 'endpoints')
-    implementation project(':JokeLibrary')
     implementation project(':JokeViewLibrary')
 
     implementation 'com.android.support:appcompat-v7:27.1.1'
@@ -66,3 +64,12 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
 }
+
+//task unitTest(type:Test, dependsOn: assemble) {
+//    description = "run unit tests"
+//    testClassesDir = project.sourceSets.unitTest.output.classesDir
+//    classpath = project.sourceSets.unitTest.runtimeClasspath
+//}
+
+// bind to check
+//check.dependsOn AndroidTest

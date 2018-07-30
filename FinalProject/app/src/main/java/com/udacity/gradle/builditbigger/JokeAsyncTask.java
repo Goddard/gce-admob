@@ -1,11 +1,9 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Pair;
-import android.widget.Toast;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -49,16 +47,18 @@ public class JokeAsyncTask extends AsyncTask<Pair<Context, String>, Void, String
         name = params[0].second;
 
         try {
-            return myApiService.sayHi(name).execute().getData();
+            Log.i("API", myApiService.sendJoke(name).execute().getData());
+            return myApiService.sendJoke(name).execute().getData();
         } catch (IOException e) {
-            return e.getMessage();
+            Log.i("API", e.getMessage());
+            return "";
         }
     }
 
     @Override
     protected void onPostExecute(String result) {
         Log.i("API", name);
-//        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
         this.listener.onTaskCompleted(result);
     }
 }

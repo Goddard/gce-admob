@@ -9,14 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.goddardlabs.jokeviewlibrary.DisplayJokeActivity;
 import com.udacity.gradle.builditbigger.JokeAsyncTask;
 import com.udacity.gradle.builditbigger.OnTaskCompleted;
 import com.udacity.gradle.builditbigger.R;
 
-import static android.view.View.VISIBLE;
 import static com.goddardlabs.jokeviewlibrary.Constants.JOKE_ID;
 
 
@@ -63,4 +61,3 @@ public class MainActivity extends AppCompatActivity implements OnTaskCompleted {
         new JokeAsyncTask(this).execute(new Pair<Context, String>(this, "Manfred"));
     }
 }
-

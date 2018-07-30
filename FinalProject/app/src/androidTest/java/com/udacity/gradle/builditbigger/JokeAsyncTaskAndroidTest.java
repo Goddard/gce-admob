@@ -4,7 +4,10 @@ import android.content.Context;
 import android.os.ConditionVariable;
 import android.test.AndroidTestCase;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Pair;
+
+import java.util.concurrent.ExecutionException;
 
 public class JokeAsyncTaskAndroidTest extends AndroidTestCase implements OnTaskCompleted {
 
@@ -13,7 +16,7 @@ public class JokeAsyncTaskAndroidTest extends AndroidTestCase implements OnTaskC
 
     @Override protected void setUp() throws Exception {
         super.setUp();
-        jokeAsyncTask = new JokeAsyncTask(JokeAsyncTaskAndroidTest.this);
+        jokeAsyncTask = new JokeAsyncTask(this);
         waiter = new ConditionVariable();
     }
 
@@ -24,6 +27,7 @@ public class JokeAsyncTaskAndroidTest extends AndroidTestCase implements OnTaskC
 
     @Override
     public void onTaskCompleted(String joke) {
+        Log.i("Async Test", joke);
         assertFalse(TextUtils.isEmpty(joke));
         waiter.open();
     }

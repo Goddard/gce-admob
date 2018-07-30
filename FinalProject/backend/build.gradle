@@ -41,3 +41,15 @@ appengine {
         port = 8080
     }
 }
+
+//task runAppEngine (dependsOn: ":backend:appengineRun") {
+//    project(":backend").afterEvaluate { backend ->
+//        backend.extensions.appengine.run
+//    }
+//
+//    doLast {
+//        println "started the server!"
+//    }
+//}
+//
+//runAppEngine.finalizedBy ":backend:appengineStop"
